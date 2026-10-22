@@ -1,0 +1,1307 @@
+/**
+ * Islamiyya School Management System (ISMS)
+ * Custom Islamic-Inspired Theme — Enhanced Edition
+ * Emerald Green | Royal Gold | Pearl White
+ */
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================================ */
+:root {
+  --islamic-green:        #0d5c46;
+  --islamic-green-dark:   #083e2f;
+  --islamic-green-light:  #167a5e;
+  --islamic-green-xlight: #eaf4f0;
+  --islamic-gold:         #c59b27;
+  --islamic-gold-light:   #e5bf55;
+  --islamic-gold-soft:    #fff9e6;
+  --islamic-gold-border:  #f0d070;
+  --islamic-bg:           #f2f6f4;
+  --islamic-surface:      #ffffff;
+  --islamic-text-dark:    #1b2e28;
+  --islamic-text-muted:   #5c7269;
+  --sidebar-width:        260px;
+  --navbar-height:        64px;
+  --radius-sm:            8px;
+  --radius-md:            12px;
+  --radius-lg:            18px;
+  --shadow-sm:            0 2px 8px rgba(0,0,0,0.05);
+  --shadow-md:            0 4px 18px rgba(0,0,0,0.08);
+  --shadow-lg:            0 10px 36px rgba(0,0,0,0.12);
+  --shadow-green:         0 8px 24px rgba(13,92,70,0.22);
+  --shadow-gold:          0 8px 24px rgba(197,155,39,0.28);
+  --transition-base:      all 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============================================================
+   2. KEYFRAME ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes countUp {
+  from { opacity: 0.2; transform: translateY(8px); }
+  to   { opacity: 1;   transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+
+/* ============================================================
+   3. ANIMATION UTILITY CLASSES
+   ============================================================ */
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+.animate-fade-in-up.delay-1 { animation-delay: 0.08s; }
+.animate-fade-in-up.delay-2 { animation-delay: 0.16s; }
+.animate-fade-in-up.delay-3 { animation-delay: 0.24s; }
+.animate-fade-in-up.delay-4 { animation-delay: 0.32s; }
+.animate-fade-in-up.delay-5 { animation-delay: 0.40s; }
+.animate-fade-in-up.delay-6 { animation-delay: 0.48s; }
+
+/* Elements that will be animated on scroll (start invisible) */
+.will-animate {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.will-animate.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   4. BASE / BODY
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  background-color: var(--islamic-bg);
+  color: var(--islamic-text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--islamic-bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--islamic-green-light), var(--islamic-green-dark));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--islamic-green); }
+
+/* ============================================================
+   5. NAVBAR
+   ============================================================ */
+.navbar-islamic {
+  background: linear-gradient(135deg, var(--islamic-green-dark) 0%, var(--islamic-green) 100%);
+  border-bottom: 3px solid var(--islamic-gold);
+  box-shadow: 0 4px 20px rgba(13,92,70,0.2);
+  min-height: var(--navbar-height);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.navbar-brand-text {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff !important;
+  font-size: 1.1rem;
+}
+
+.navbar-brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--islamic-gold-light);
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   6. COLOUR & TEXT UTILITIES
+   ============================================================ */
+.badge-gold    { background-color: var(--islamic-gold); color: #fff; }
+.badge-islamic { background-color: var(--islamic-green); color: #fff; }
+.text-gold     { color: var(--islamic-gold) !important; }
+.text-islamic  { color: var(--islamic-green) !important; }
+.bg-islamic    { background-color: var(--islamic-green) !important; color: #fff; }
+.bg-islamic-soft { background-color: var(--islamic-green-xlight) !important; }
+
+/* ============================================================
+   7. BUTTONS
+   ============================================================ */
+.btn-islamic {
+  background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green-dark));
+  border: none;
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.btn-islamic::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.2s;
+}
+.btn-islamic:hover, .btn-islamic:focus {
+  background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-dark));
+  color: #ffffff;
+  box-shadow: var(--shadow-green);
+  transform: translateY(-1px);
+}
+.btn-islamic:active { transform: translateY(0); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--islamic-gold-light), var(--islamic-gold));
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  transition: var(--transition-base);
+}
+.btn-gold:hover, .btn-gold:focus {
+  background: linear-gradient(135deg, var(--islamic-gold), #ab841e);
+  color: #ffffff;
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+.btn-outline-islamic {
+  border: 2px solid var(--islamic-green);
+  color: var(--islamic-green);
+  background: transparent;
+  font-weight: 500;
+  transition: var(--transition-base);
+}
+.btn-outline-islamic:hover {
+  background-color: var(--islamic-green);
+  color: #ffffff;
+  box-shadow: var(--shadow-green);
+}
+
+/* ============================================================
+   8. STAT CARDS — Enhanced
+   ============================================================ */
+.stat-card {
+  border: none;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 6px; /* space for bottom bar */
+}
+
+/* Subtle top-left glow orb */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,92,70,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.1);
+}
+
+/* Left accent bar */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--islamic-green);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Bottom progress bar */
+.stat-card .stat-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 60%;
+  background: linear-gradient(90deg, var(--islamic-green-light), var(--islamic-green-dark));
+  border-radius: 0 4px 4px 0;
+  animation: progressFill 1.2s ease-out both;
+}
+
+/* Variants */
+.stat-card-green::before  { background: linear-gradient(180deg, var(--islamic-green-light), var(--islamic-green-dark)); }
+.stat-card-green:hover    { box-shadow: 0 14px 36px rgba(13,92,70,0.18); }
+.stat-card-green .stat-progress-bar { background: linear-gradient(90deg, var(--islamic-green-light), var(--islamic-green-dark)); }
+.stat-card-green .stat-icon-wrap    { background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green-dark)); }
+
+.stat-card-gold::before   { background: linear-gradient(180deg, var(--islamic-gold-light), var(--islamic-gold)); }
+.stat-card-gold:hover     { box-shadow: 0 14px 36px rgba(197,155,39,0.2); }
+.stat-card-gold .stat-progress-bar { background: linear-gradient(90deg, var(--islamic-gold-light), var(--islamic-gold)); }
+.stat-card-gold .stat-icon-wrap    { background: linear-gradient(135deg, var(--islamic-gold-light), var(--islamic-gold)); }
+
+/* legacy aliases */
+.stat-card.gold-border::before   { background: linear-gradient(180deg, var(--islamic-gold-light), var(--islamic-gold)); }
+.stat-card.danger-border::before { background: linear-gradient(180deg, #f06a75, #dc3545); }
+.stat-card.info-border::before   { background: linear-gradient(180deg, #67e0f5, #0dcaf0); }
+
+.stat-card-danger::before  { background: linear-gradient(180deg, #f06a75, #dc3545); }
+.stat-card-danger:hover    { box-shadow: 0 14px 36px rgba(220,53,69,0.18); }
+.stat-card-danger .stat-progress-bar { background: linear-gradient(90deg, #f06a75, #dc3545); }
+.stat-card-danger .stat-icon-wrap    { background: linear-gradient(135deg, #f06a75, #dc3545); }
+
+.stat-card-info::before    { background: linear-gradient(180deg, #67e0f5, #0dcaf0); }
+.stat-card-info:hover      { box-shadow: 0 14px 36px rgba(13,202,240,0.18); }
+.stat-card-info .stat-progress-bar { background: linear-gradient(90deg, #67e0f5, #0dcaf0); }
+.stat-card-info .stat-icon-wrap    { background: linear-gradient(135deg, #67e0f5, #0dcaf0); }
+
+/* Icon wrapper — gradient bubble */
+.stat-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.stat-card:hover .stat-icon-wrap { transform: scale(1.1) rotate(-3deg); }
+
+/* Legacy flat icon */
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Counter number */
+.stat-counter {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  animation: countUp 0.4s ease both;
+  color: var(--islamic-text-dark);
+}
+
+/* ============================================================
+   9. LAYOUT — APP CONTAINER, SIDEBAR, MAIN CONTENT
+   ============================================================ */
+.app-container {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+/* ---- Sidebar ---- */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #ffffff;
+  border-right: 1px solid #dce9e3;
+  min-height: calc(100vh - var(--navbar-height));
+  padding: 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease, transform 0.3s ease;
+  position: sticky;
+  top: var(--navbar-height);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 100;
+}
+
+.sidebar-mini .sidebar {
+  width: 72px;
+  padding: 1.25rem 0.5rem;
+  overflow: visible;
+}
+.sidebar-mini .sidebar-heading,
+.sidebar-mini .sidebar .nav-link-text { display: none; }
+.sidebar-mini .sidebar .nav-link {
+  justify-content: center;
+  gap: 0;
+  padding: 0.7rem;
+}
+.sidebar-mini .sidebar .nav-link i { margin: 0; font-size: 1.3rem; }
+
+.sidebar-heading {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--islamic-text-muted);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  margin-top: 0.75rem;
+}
+
+.sidebar .nav-link {
+  color: #3b5046;
+  font-weight: 500;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: var(--transition-base);
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+
+.sidebar .nav-link i {
+  font-size: 1.15rem;
+  color: var(--islamic-green);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sidebar .nav-link:hover {
+  background: var(--islamic-green-xlight);
+  color: var(--islamic-green-dark);
+  border-left-color: var(--islamic-green-light);
+}
+.sidebar .nav-link:hover i { transform: scale(1.15); animation: pulse 0.6s ease; }
+
+.sidebar .nav-link.active {
+  background: linear-gradient(90deg, #d8ede7 0%, #f0f9f6 100%);
+  color: var(--islamic-green-dark);
+  font-weight: 600;
+  border-left: 3px solid var(--islamic-green);
+  box-shadow: 2px 0 0 0 var(--islamic-green) inset;
+}
+
+.sidebar .nav-link.active i { color: var(--islamic-gold); }
+
+/* Sidebar backdrop (mobile) */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 99;
+  animation: fadeIn 0.2s ease;
+}
+.sidebar-backdrop.show { display: block; }
+
+/* ---- Main Content ---- */
+.main-content {
+  flex: 1;
+  padding: 1.75rem;
+  background-color: var(--islamic-bg);
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* ============================================================
+   10. PAGE HEADER COMPONENT
+   ============================================================ */
+.page-header {
+  background: linear-gradient(135deg, var(--islamic-green-dark) 0%, var(--islamic-green) 60%, var(--islamic-green-light) 100%);
+  color: #fff;
+  padding: 1.4rem 1.75rem;
+  margin: -1.75rem -1.75rem 1.75rem;
+  border-bottom: 3px solid var(--islamic-gold);
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -5%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+.page-header h1,
+.page-header h2,
+.page-header h3 { color: #fff; margin: 0; font-weight: 700; }
+.page-header .page-header-subtitle { color: var(--islamic-gold-light); font-size: 0.85rem; margin-top: 0.15rem; }
+
+.page-header-breadcrumb {
+  background: rgba(0,0,0,0.18);
+  padding: 0.45rem 1.75rem;
+  margin: 0 -1.75rem -1.75rem;
+  margin-top: 0.75rem;
+}
+.page-header-breadcrumb .breadcrumb { margin: 0; }
+.page-header-breadcrumb .breadcrumb-item,
+.page-header-breadcrumb .breadcrumb-item a { color: var(--islamic-gold-light); font-size: 0.82rem; }
+.page-header-breadcrumb .breadcrumb-item.active { color: rgba(255,255,255,0.75); }
+.page-header-breadcrumb .breadcrumb-item + .breadcrumb-item::before { color: var(--islamic-gold-light); }
+
+/* ============================================================
+   11. HERO SECTION (Public / Landing)
+   ============================================================ */
+.hero-section {
+  background: linear-gradient(135deg, rgba(8,62,47,0.95), rgba(13,92,70,0.88)),
+              url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  color: #ffffff;
+  padding: 4.5rem 1rem;
+  border-bottom: 4px solid var(--islamic-gold);
+}
+
+.arabic-header {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.75rem;
+  color: var(--islamic-gold-light);
+  margin-bottom: 0.5rem;
+  direction: rtl;
+}
+
+/* ============================================================
+   12. CARD — Modern
+   ============================================================ */
+.card-modern {
+  border: none;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  transition: var(--transition-base);
+}
+.card-modern:hover { box-shadow: var(--shadow-md); }
+
+.card-modern .card-header {
+  background: #ffffff;
+  border-bottom: 1px solid #edf2ef;
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-modern .card-header i { color: var(--islamic-green); }
+
+/* ============================================================
+   13. TABLES — Islamic Style
+   ============================================================ */
+.table th {
+  font-size: 0.83rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--islamic-text-muted);
+  border-bottom-width: 1px;
+  white-space: nowrap;
+}
+.table td { vertical-align: middle; }
+
+/* Islamic-themed table */
+.table-islamic thead th {
+  background: linear-gradient(135deg, var(--islamic-green-dark), var(--islamic-green));
+  color: #fff;
+  font-size: 0.83rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  padding: 0.9rem 1rem;
+  white-space: nowrap;
+}
+.table-islamic thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+.table-islamic thead th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+.table-islamic tbody tr:nth-child(even) { background: var(--islamic-green-xlight); }
+.table-islamic tbody tr:hover { background: #d8ede7; }
+.table-islamic tbody td { padding: 0.75rem 1rem; border-color: #e0ece7; }
+
+/* Sortable column header */
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.sortable-th::after {
+  content: ' ⇕';
+  font-size: 0.7rem;
+  opacity: 0.55;
+}
+.sortable-th.sort-asc::after  { content: ' ↑'; opacity: 1; }
+.sortable-th.sort-desc::after { content: ' ↓'; opacity: 1; }
+
+/* ============================================================
+   14. ACTIVITY FEED / TIMELINE
+   ============================================================ */
+.activity-feed { list-style: none; padding: 0; margin: 0; }
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #edf2ef;
+  animation: slideIn 0.3s ease both;
+  position: relative;
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-item .activity-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  color: #fff;
+}
+.activity-icon.bg-success { background: linear-gradient(135deg, #28c76f, #20a354); }
+.activity-icon.bg-info    { background: linear-gradient(135deg, #17c1e8, #0ea3c4); }
+.activity-icon.bg-warning { background: linear-gradient(135deg, var(--islamic-gold-light), var(--islamic-gold)); }
+.activity-icon.bg-danger  { background: linear-gradient(135deg, #f06a75, #dc3545); }
+.activity-icon.bg-islamic { background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green-dark)); }
+
+.activity-item .activity-body { flex: 1; min-width: 0; }
+.activity-item .activity-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--islamic-text-dark);
+  margin-bottom: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.activity-item .activity-time {
+  font-size: 0.75rem;
+  color: var(--islamic-text-muted);
+}
+
+/* ============================================================
+   15. FEE PROGRESS BAR
+   ============================================================ */
+.fee-progress-wrap { margin-bottom: 0.5rem; }
+.fee-progress-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--islamic-text-muted);
+  margin-bottom: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fee-progress-bar {
+  height: 10px;
+  border-radius: 100px;
+  background: #e0ece7;
+  overflow: hidden;
+  position: relative;
+}
+.fee-progress-bar .fee-progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--islamic-green-light), var(--islamic-gold));
+  animation: progressFill 1.4s cubic-bezier(0.4,0,0.2,1) both;
+  transition: width 0.6s ease;
+  position: relative;
+  overflow: hidden;
+}
+.fee-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -200px;
+  width: 200px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: shimmer 2s linear 1.4s infinite;
+}
+
+/* ============================================================
+   16. NOTIFICATION ITEMS
+   ============================================================ */
+.notification-list { list-style: none; padding: 0; margin: 0; }
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f0f4f2;
+  transition: background 0.18s ease;
+  cursor: pointer;
+  position: relative;
+}
+.notification-item:hover { background: var(--islamic-green-xlight); }
+.notification-item:last-child { border-bottom: none; }
+
+/* Unread state */
+.notification-item.unread {
+  border-left: 3px solid var(--islamic-gold);
+  background: var(--islamic-gold-soft);
+  padding-left: calc(1rem - 3px);
+}
+.notification-item.unread:hover { background: #fef5d4; }
+
+.notification-item .notif-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--islamic-green-xlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--islamic-green);
+  flex-shrink: 0;
+}
+.notification-item.unread .notif-icon { background: var(--islamic-gold-soft); color: var(--islamic-gold); }
+
+.notification-item .notif-body { flex: 1; min-width: 0; }
+.notification-item .notif-title { font-size: 0.87rem; font-weight: 600; margin-bottom: 0.05rem; }
+.notification-item .notif-desc  { font-size: 0.79rem; color: var(--islamic-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.notification-item .notif-time  { font-size: 0.72rem; color: var(--islamic-text-muted); white-space: nowrap; }
+
+/* Unread dot */
+.notification-item.unread::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--islamic-gold);
+}
+
+/* ============================================================
+   17. QUICK ACTION CARDS
+   ============================================================ */
+.quick-action-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; }
+
+.quick-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.25rem 0.75rem;
+  background: #ffffff;
+  border: 1px solid #dce9e3;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--islamic-text-dark);
+  cursor: pointer;
+  transition: var(--transition-base);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.quick-action-card:hover {
+  background: var(--islamic-green);
+  color: #fff;
+  border-color: var(--islamic-green);
+  box-shadow: var(--shadow-green);
+  transform: translateY(-3px);
+}
+.quick-action-card:hover .qa-icon { background: rgba(255,255,255,0.2); color: #fff; }
+.quick-action-card:hover .qa-label { color: #fff; }
+
+.qa-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--islamic-green-xlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--islamic-green);
+  transition: var(--transition-base);
+}
+.qa-label { font-size: 0.8rem; font-weight: 600; }
+
+/* ============================================================
+   18. TOAST NOTIFICATION SYSTEM
+   ============================================================ */
+.toast-container-custom {
+  position: fixed;
+  top: calc(var(--navbar-height) + 12px);
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 360px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.toast-islamic {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+  border-left: 4px solid var(--islamic-green);
+  pointer-events: all;
+  animation: toastSlideIn 0.3s cubic-bezier(0.4,0,0.2,1) both;
+  position: relative;
+  overflow: hidden;
+}
+.toast-islamic.hiding { animation: toastSlideOut 0.3s ease forwards; }
+
+.toast-islamic.toast-success { border-left-color: #28c76f; }
+.toast-islamic.toast-error   { border-left-color: #dc3545; }
+.toast-islamic.toast-warning { border-left-color: var(--islamic-gold); }
+.toast-islamic.toast-info    { border-left-color: #0dcaf0; }
+
+.toast-islamic .toast-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  color: #fff;
+}
+.toast-success .toast-icon { background: #28c76f; }
+.toast-error   .toast-icon { background: #dc3545; }
+.toast-warning .toast-icon { background: var(--islamic-gold); }
+.toast-info    .toast-icon { background: #0dcaf0; }
+.toast-islamic:not([class*="toast-success"]):not([class*="toast-error"]):not([class*="toast-warning"]):not([class*="toast-info"]) .toast-icon { background: var(--islamic-green); }
+
+.toast-islamic .toast-body  { flex: 1; }
+.toast-islamic .toast-msg   { font-size: 0.87rem; color: var(--islamic-text-dark); font-weight: 500; }
+.toast-islamic .toast-close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--islamic-text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+.toast-islamic .toast-close:hover { color: var(--islamic-text-dark); }
+
+/* Progress bar on toast */
+.toast-islamic .toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: currentColor;
+  opacity: 0.35;
+  animation: progressFill 4s linear forwards;
+  width: 100%;
+  transform-origin: left;
+}
+
+/* ============================================================
+   19. BACK TO TOP BUTTON
+   ============================================================ */
+#backToTop {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green-dark));
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-green);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  opacity: 0;
+  transform: translateY(16px) scale(0.85);
+  transition: opacity 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease;
+  pointer-events: none;
+}
+#backToTop.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+#backToTop:hover {
+  box-shadow: 0 10px 30px rgba(13,92,70,0.35);
+  transform: translateY(-2px) scale(1.07);
+}
+
+/* ============================================================
+   20. PAGE LOADING OVERLAY
+   ============================================================ */
+#pageLoader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(255,255,255,0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  backdrop-filter: blur(3px);
+  transition: opacity 0.3s ease;
+}
+#pageLoader.hidden { opacity: 0; pointer-events: none; }
+
+#pageLoader .loader-spinner {
+  width: 46px;
+  height: 46px;
+  border: 4px solid var(--islamic-green-xlight);
+  border-top-color: var(--islamic-green);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+#pageLoader .loader-text {
+  font-size: 0.9rem;
+  color: var(--islamic-green);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   21. CHILD REGISTRATION FORM CARDS
+   ============================================================ */
+.child-form-card {
+  border: 1px solid #d4e3dc;
+  border-left: 4px solid var(--islamic-gold);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  animation: fadeInUp 0.35s ease both;
+}
+
+/* ============================================================
+   22. RECEIPT / PRINT
+   ============================================================ */
+.receipt-container {
+  max-width: 780px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 2px solid #0d5c46;
+  border-radius: var(--radius-sm);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.receipt-header-banner {
+  border-bottom: 2px dashed #0d5c46;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.receipt-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(13, 92, 70, 0.04);
+  pointer-events: none;
+  text-transform: uppercase;
+  z-index: 0;
+}
+
+.receipt-stamp {
+  border: 2px solid #0d5c46;
+  color: #0d5c46;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transform: rotate(-5deg);
+}
+
+/* ============================================================
+   23. CONFIRMATION MODAL
+   ============================================================ */
+#confirmModal .modal-header {
+  background: linear-gradient(135deg, var(--islamic-green-dark), var(--islamic-green));
+  color: #fff;
+  border-bottom: 2px solid var(--islamic-gold);
+}
+#confirmModal .modal-header .btn-close { filter: invert(1); }
+#confirmModal .modal-footer .btn-islamic { min-width: 90px; }
+
+/* ============================================================
+   24. FORM ENHANCEMENTS
+   ============================================================ */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--islamic-green);
+  box-shadow: 0 0 0 0.2rem rgba(13,92,70,0.15);
+}
+.form-label { font-weight: 500; font-size: 0.9rem; }
+.form-control, .form-select { border-radius: var(--radius-sm); }
+
+/* Search bar with results badge */
+.table-search-wrap { position: relative; }
+.table-search-results {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--islamic-text-muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Text highlight from search */
+mark.search-highlight {
+  background: var(--islamic-gold-soft);
+  color: var(--islamic-green-dark);
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   25. GENERAL ALERTS
+   ============================================================ */
+.alert { border-radius: var(--radius-sm); border-left-width: 4px; }
+.alert-success { border-left-color: #28c76f; }
+.alert-danger  { border-left-color: #dc3545; }
+.alert-warning { border-left-color: var(--islamic-gold); }
+.alert-info    { border-left-color: #0dcaf0; }
+
+/* ============================================================
+   26. CHART CONTAINERS
+   ============================================================ */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+/* ============================================================
+   27. RESPONSIVE — MOBILE SIDEBAR
+   ============================================================ */
+@media (max-width: 991px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    z-index: 1050;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+    padding-top: calc(var(--navbar-height) + 1rem);
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .main-content { padding: 1.25rem; }
+
+  .page-header {
+    margin: -1.25rem -1.25rem 1.25rem;
+    padding: 1.1rem 1.25rem;
+  }
+  .page-header-breadcrumb { margin: 0 -1.25rem -1.25rem; }
+}
+
+@media (max-width: 767px) {
+  .main-content { padding: 1rem; }
+  .page-header  { margin: -1rem -1rem 1rem; padding: 1rem; }
+  .page-header-breadcrumb { margin: 0 -1rem -1rem; }
+  .stat-card    { margin-bottom: 1rem; }
+  .quick-action-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.75rem; }
+  .toast-container-custom { right: 8px; left: 8px; max-width: none; }
+  .stat-counter { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .quick-action-card { padding: 1rem 0.5rem; }
+  .qa-icon { width: 44px; height: 44px; font-size: 1.2rem; }
+}
+
+/* ============================================================
+   28. INTERACTIVE MICRO-COMPONENTS & USER EXPERIENCE
+   ============================================================ */
+
+/* One-Click Copy Buttons & Badges */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(13,92,70,0.2);
+  background: var(--islamic-green-xlight);
+  color: var(--islamic-green);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  user-select: none;
+}
+.copy-btn:hover {
+  background: var(--islamic-green);
+  color: #ffffff;
+  border-color: var(--islamic-green);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(13,92,70,0.18);
+}
+.copy-btn.copied {
+  background: #28c76f !important;
+  color: #ffffff !important;
+  border-color: #28c76f !important;
+  transform: scale(0.97);
+}
+
+/* File Dropzone & Live Image Preview */
+.file-dropzone-wrap {
+  border: 2px dashed #b7d6cb;
+  background: #f8fbf9;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+}
+.file-dropzone-wrap:hover,
+.file-dropzone-wrap.drag-over {
+  border-color: var(--islamic-green);
+  background: #eaf5f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(13,92,70,0.08);
+}
+.file-dropzone-wrap input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+.dropzone-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--islamic-green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  margin-bottom: 0.6rem;
+  transition: transform 0.2s ease;
+}
+.file-dropzone-wrap:hover .dropzone-icon {
+  transform: scale(1.1);
+  color: var(--islamic-gold);
+}
+.dropzone-preview-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid #dce9e3;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  animation: fadeInUp 0.3s ease both;
+  text-align: left;
+}
+.dropzone-preview-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 1px solid #e0ece7;
+  background: #f5f8f6;
+  flex-shrink: 0;
+}
+
+/* Quick Fill Percentage Pills & Fee Calculator */
+.fee-quick-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.fee-pill-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 50px;
+  border: 1px solid #d0dfd8;
+  background: #ffffff;
+  color: var(--islamic-green-dark);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.fee-pill-btn:hover,
+.fee-pill-btn.active {
+  background: var(--islamic-green);
+  color: #ffffff;
+  border-color: var(--islamic-green);
+  box-shadow: 0 2px 6px rgba(13,92,70,0.2);
+}
+.fee-calc-indicator {
+  background: #ffffff;
+  border: 1px solid #dce9e3;
+  border-left: 4px solid var(--islamic-green);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  margin-top: 0.75rem;
+  transition: all 0.25s ease;
+}
+.fee-calc-indicator.cleared {
+  border-left-color: #28c76f;
+  background: #f4fbf7;
+}
+
+/* Password Toggle Eyeball */
+.password-wrap {
+  position: relative;
+}
+.password-toggle-btn {
+  border: none;
+  background: transparent;
+  color: var(--islamic-text-muted);
+  cursor: pointer;
+  padding: 0 0.85rem;
+  transition: color 0.18s ease;
+}
+.password-toggle-btn:hover {
+  color: var(--islamic-green);
+}
+
+/* Demo Credentials Quick-Fill Cards */
+.demo-cred-btn {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #d7e6df;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  background: #ffffff;
+  text-align: left;
+  display: block;
+  width: 100%;
+}
+.demo-cred-btn:hover {
+  border-color: var(--islamic-green);
+  background: var(--islamic-green-xlight);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13,92,70,0.1);
+}
+
+/* Table Empty State for Search Filter */
+.table-empty-search {
+  padding: 2.5rem 1rem !important;
+  text-align: center;
+  color: var(--islamic-text-muted);
+}
+.table-empty-search i {
+  font-size: 2.2rem;
+  color: #adb5bd;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Button Loading Spinner State */
+.btn.is-submitting {
+  pointer-events: none !important;
+  opacity: 0.82 !important;
+}
+
+/* ============================================================
+   29. PRINT STYLES
+   ============================================================ */
+@media print {
+  body { background: #ffffff !important; }
+  .navbar, .sidebar, .btn, .no-print, footer, .alert,
+  #backToTop, #pageLoader, .toast-container-custom { display: none !important; }
+  .main-content { padding: 0 !important; }
+  .app-container { display: block; }
+  .receipt-container {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    padding: 1rem !important;
+    width: 100% !important;
+  }
+}
