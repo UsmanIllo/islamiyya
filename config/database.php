@@ -4,27 +4,18 @@
  * Islamiyya School Management System (ISMS)
  */
 
-if (!defined('DB_HOST')) define('DB_HOST', $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?? '127.0.0.1');
-if (!defined('DB_PORT')) define('DB_PORT', $_ENV['DB_PORT'] ?? getenv('DB_PORT') ?? '3306');
-if (!defined('DB_NAME')) define('DB_NAME', $_ENV['DB_NAME'] ?? getenv('DB_NAME') ?? 'islamiyya_db');
-if (!defined('DB_USER')) define('DB_USER', $_ENV['DB_USER'] ?? getenv('DB_USER') ?? 'root');
-if (!defined('DB_PASS')) define('DB_PASS', $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?? '');
+$host = $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?: 'sql.freedb.tech';
+$port = $_ENV['DB_PORT'] ?? getenv('DB_PORT') ?: '3306';
+$dbname = $_ENV['DB_NAME'] ?? getenv('DB_NAME') ?: 'freedb_T10ZP7cs';
+$user = $_ENV['DB_USER'] ?? getenv('DB_USER') ?: 'u_aZODTo';
+$pass = $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?: '';
 
-function get_db_connection(): PDO {
-    static $pdo = null;
-    if ($pdo === null) {
-        $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
-        $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-        ];
-        try {
-            $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-        } catch (PDOException $e) {
-            // Friendly error message for users
-            die("<h3>Database Connection Error</h3><p>Could not connect to the Islamiyya School database. Please ensure MySQL is running and the database has been imported.</p><p><a href='/islamiyya/install.php'>Click here to run the Web Installer</a></p><hr><small>Technical Error: " . htmlspecialchars($e->getMessage()) . "</small>");
-        }
-    }
-    return $pdo;
+try {
+    $dsn = "mysql :host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,]
+    ]);
+} catch (PDOException $e) {
+    die("Database Connection Error: " . $e->getMessage());
 }
